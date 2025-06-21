@@ -111,8 +111,8 @@
         <li><a href="#kandidat" class="nav-link text-sm font-medium hover:text-primary">Kandidat</a></li>
         <li><a href="#langkah" class="nav-link text-sm font-medium hover:text-primary">Langkah</a></li>
         <li><a href="#tentang" class="nav-link text-sm font-medium hover:text-primary">Tentang</a></li>
-        <li><a href="#footer" class="nav-link text-sm font-medium hover:text-primary">Hasil</a></li>
-        <li><a href="#vote" class="bg-primary px-4 py-2 rounded-lg text-sm font-semibold text-white hover:bg-blue-600 transition shadow-md">Vote Sekarang</a></li>
+        <li><a href="#hasil" class="nav-link text-sm font-medium hover:text-primary">Hasil</a></li>
+        <li><a href="{{ route('vote.login') }}" class="bg-primary px-4 py-2 rounded-lg text-sm font-semibold text-white hover:bg-blue-600 transition shadow-md">Vote Sekarang</a></li>
       </ul>
       <button class="md:hidden text-slate-600">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -122,6 +122,33 @@
     </div>
   </nav>
 
+  {{-- Notifikasi --}}
+@if(session('success') || session('error'))
+    <div 
+        id="alertBox"
+        class="relative bg-{{ session('success') ? 'green' : 'red' }}-100 border-l-4 border-{{ session('success') ? 'green' : 'red' }}-500 text-{{ session('success') ? 'green' : 'red' }}-700 p-4 rounded mb-6 shadow transition-opacity duration-500"
+    >
+        <p>{{ session('success') ?? session('error') }}</p>
+        <button 
+            onclick="document.getElementById('alertBox').remove()"
+            class="absolute top-1 right-2 text-xl font-bold text-{{ session('success') ? 'green' : 'red' }}-700 hover:text-black"
+        >
+            &times;
+        </button>
+    </div>
+@endif
+
+<script>
+    setTimeout(() => {
+        const alertBox = document.getElementById('alertBox');
+        if (alertBox) {
+            alertBox.style.opacity = '0';
+            setTimeout(() => alertBox.remove(), 500); // delay untuk animasi
+        }
+    }, 3000); // auto hilang 3 detik
+</script>
+
+
   <!-- Hero Section -->
   <section class="relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 py-16 md:py-24 flex flex-col md:flex-row items-center gap-8 relative z-10">
@@ -130,7 +157,7 @@
         <p class="mb-6 text-slate-600 text-lg">Partisipasi aktif Anda menentukan arah organisasi siswa di SMK Negeri 1 . Setiap suara berharga untuk perubahan yang lebih baik!</p>
         <div class="flex flex-col sm:flex-row gap-4">
           <a href="#kandidat" class="vote-btn bg-primary text-white px-6 py-3 rounded-lg font-semibold text-center">Lihat Kandidat</a>
-          <a href="#vote" class="bg-white text-primary border border-primary px-6 py-3 rounded-lg font-semibold text-center hover:bg-primary hover:text-white transition">Vote Sekarang</a>
+          <a href="{{ route('vote.login') }}" class="bg-white text-primary border border-primary px-6 py-3 rounded-lg font-semibold text-center hover:bg-primary hover:text-white transition">Vote Sekarang</a>
         </div>
       </div>
       <div class="md:w-1/2 animate__animated animate__fadeInRight">
@@ -284,84 +311,198 @@
   </section>
 
 <!-- Hasil Voting Section -->
-<section class="py-16 px-4 bg-white">
-  <div class="max-w-7xl mx-auto">
+<section id="hasil" class="py-12 md:py-16 px-4 bg-gray-50">
+  <div class="max-w-6xl mx-auto">
     <div class="text-center mb-12">
-      <h3 class="text-3xl font-bold text-primary mb-4">Hasil Voting Sementara</h3>
-      <p class="text-slate-600 max-w-2xl mx-auto">Lihat perkembangan hasil pemilihan ketua OSIS secara real-time</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-primary mb-3">Hasil Voting Sementara</h2>
+      <p class="text-gray-600 max-w-2xl mx-auto text-lg">Perkembangan hasil pemilihan ketua OSIS secara real-time</p>
     </div>
 
-    <!-- Diagram Batang -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-      <div class="bg-white p-6 rounded-xl shadow-sm">
-        <h4 class="font-semibold text-lg mb-4 text-center">Perolehan Suara</h4>
-        <div class="h-64 flex items-end justify-center space-x-4">
-          @foreach ($processedCandidates as $item)
-            <div class="flex flex-col items-center">
-              <div class="w-12 bg-primary rounded-t-md transition-all duration-500" style="height: {{ $item['percentage'] }}%;"></div>
-              <span class="text-xs mt-2">{{ $item['name'] }}</span>
-              <span class="text-sm font-semibold">{{ $item['percentage'] }}%</span>
-            </div>
-          @endforeach
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+      <!-- Total Votes Card -->
+      <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-500">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-blue-50 text-blue-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <div class="ml-4">
+            <h3 class="text-gray-500 text-sm font-medium">Total Suara</h3>
+            <p class="text-2xl font-bold text-gray-800">{{ number_format($totalSuara) }}</p>
+          </div>
         </div>
       </div>
 
-      <!-- Ring Diagram Placeholder -->
-      <div class="bg-white p-6 rounded-xl shadow-sm text-center">
-        <h4 class="font-semibold text-lg mb-4 text-center">Total Suara</h4>
-        <div class="text-6xl font-bold text-primary">{{ number_format($totalSuara) }}</div>
-        <div class="mt-2 text-slate-500 text-sm">Data akan diperbarui secara real-time</div>
+      <!-- Leading Candidate Card -->
+      @php $leading = collect($processedCandidates)->sortByDesc('votes')->first(); @endphp
+      <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-green-500">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-green-50 text-green-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+          </div>
+          <div class="ml-4">
+            <h3 class="text-gray-500 text-sm font-medium">Pemimpin Sementara</h3>
+            <p class="text-xl font-bold text-gray-800">{{ $leading['name'] }}</p>
+            <p class="text-sm text-gray-600">{{ $leading['votes'] }} suara ({{ $leading['percentage'] }}%)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Participation Rate Card -->
+      <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-purple-500">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-purple-50 text-purple-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </div>
+                <div class="ml-4">
+                    <h3 class="text-gray-500 text-sm font-medium">Partisipasi</h3>
+                    <p class="text-2xl font-bold text-gray-800">{{ $partisipasi }}%</p>
+                    <p class="text-sm text-gray-600">dari total pemilih terdaftar</p>
+                </div>
+            </div>
+        </div>
       </div>
     </div>
 
-    <!-- Tabel Hasil Detail -->
-    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-slate-50">
-          <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Kandidat</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Jumlah Suara</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Persentase</th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          @foreach ($processedCandidates as $item)
-          <tr>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="flex items-center">
-                <div class="flex-shrink-0 h-10 w-10">
-                  <img class="h-10 w-10 rounded-full" src="{{ asset('storage/' . $item['photo']) }}" alt="{{ $item['name'] }}">
-                </div>
-                <div class="ml-4">
-                  <div class="text-sm font-medium text-slate-900">{{ $item['name'] }}</div>
-                </div>
+    <!-- Charts Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+      <!-- Bar Chart -->
+      <div class="bg-white p-6 rounded-xl shadow-md">
+  <h3 class="text-lg font-semibold text-gray-800 mb-4">Perolehan Suara</h3>
+  <div class="h-64 mt-8">
+    <div class="flex items-end h-64 space-x-3">
+      @foreach ($processedCandidates as $item)
+        <div class="flex flex-col items-center flex-1 h-full bg-gray-100 rounded-md">
+          <div 
+            class="w-full bg-gradient-to-t from-blue-500 to-blue-400 rounded-t-md transition-all duration-500 hover:from-blue-600 hover:to-blue-500"
+            style="height: {{ $item['percentage'] }}%;"
+            title="{{ $item['name'] }}: {{ $item['percentage'] }}%">
+          </div>
+          <div class="mt-2 text-center">
+            <div class="h-10 w-10 mx-auto rounded-full overflow-hidden border-2 border-white shadow-md">
+              <img src="{{ $item['photo'] ? asset('storage/' . $item['photo']) : 'https://via.placeholder.com/40' }}" alt="{{ $item['name'] }}" class="h-full w-full object-cover">
+            </div>
+            <span class="block mt-2 text-sm font-medium text-gray-700">{{ $item['name'] }}</span>
+            <span class="block text-xs text-blue-600 font-bold">{{ $item['percentage'] }}%</span>
+          </div>
+        </div>
+      @endforeach
+    </div>
+  </div>
+</div>
+
+
+      <!-- Pie Chart Placeholder -->
+      <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">Distribusi Suara</h3>
+        <div class="h-64 flex items-center justify-center">
+          <div class="relative w-48 h-48">
+            @php
+              $offset = 0;
+              $colors = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'];
+            @endphp
+            
+            @foreach ($processedCandidates as $index => $item)
+            <div class="absolute inset-0">
+              <svg viewBox="0 0 100 100" class="w-full h-full">
+                <circle 
+                  cx="50" 
+                  cy="50" 
+                  r="45" 
+                  fill="transparent"
+                  stroke="{{ $colors[$index % count($colors)] }}"
+                  stroke-width="10"
+                  stroke-dasharray="{{ $item['percentage'] * 2.83 }} 283"
+                  stroke-dashoffset="{{ $offset }}"
+                  transform="rotate(-90 50 50)"
+                ></circle>
+              </svg>
+            </div>
+            @php $offset -= $item['percentage'] * 2.83; @endphp
+            @endforeach
+            
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="text-center">
+                <span class="text-2xl font-bold text-gray-800">{{ $totalSuara }}</span>
+                <span class="block text-sm text-gray-500">total suara</span>
               </div>
-            </td>
-            <td class="px-6 py-4 text-sm text-slate-500">{{ number_format($item['votes']) }}</td>
-            <td class="px-6 py-4">
-              <div class="flex items-center">
-                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                  <div class="bg-primary h-2.5 rounded-full" style="width: {{ $item['percentage'] }}%"></div>
-                </div>
-                <span class="ml-2 text-sm font-medium text-slate-500">{{ $item['percentage'] }}%</span>
-              </div>
-            </td>
-          </tr>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 flex flex-wrap justify-center gap-3">
+          @foreach ($processedCandidates as $index => $item)
+          <div class="flex items-center">
+            <span class="w-3 h-3 rounded-full mr-2" style="background-color: {{ $colors[$index % count($colors)] }}"></span>
+            <span class="text-sm text-gray-600">{{ $item['name'] }}</span>
+          </div>
           @endforeach
-        </tbody>
-        <tfoot class="bg-slate-50">
-          <tr>
-            <td class="px-6 py-4 text-sm font-medium text-slate-900">Total</td>
-            <td class="px-6 py-4 text-sm font-medium text-slate-900">{{ number_format($totalSuara) }}</td>
-            <td class="px-6 py-4 text-sm font-medium text-slate-900">100%</td>
-          </tr>
-        </tfoot>
-      </table>
+        </div>
+      </div>
     </div>
 
-    <!-- Catatan -->
-    <div class="mt-6 text-center text-sm text-slate-500">
-      <p>Hasil ini bersifat sementara dan akan diperbarui secara real-time. Hasil final akan diumumkan setelah pemilihan berakhir.</p>
+    <!-- Detailed Results Table -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-100">
+            <tr>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kandidat</th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah Suara</th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Persentase</th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Progress</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            @foreach ($processedCandidates as $item)
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden border-2 border-white shadow-sm">
+                    <img class="h-full w-full object-cover" src="{{ asset('storage/' . $item['photo']) }}" alt="Foto {{ $item['name'] }}">
+                  </div>
+                  <div class="ml-4">
+                    <div class="text-sm font-medium text-gray-900">{{ $item['name'] }}</div>
+                    <div class="text-sm text-gray-500">Kandidat #{{ $loop->iteration }}</div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900 font-medium">{{ number_format($item['votes']) }}</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                  {{ $item['percentage'] }}%
+                </span>
+              </td>
+              <td class="px-6 py-4">
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div 
+                    class="bg-gradient-to-r from-blue-500 to-blue-400 h-2 rounded-full" 
+                    style="width: {{ $item['percentage'] }}%"
+                  ></div>
+                </div>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Note -->
+    <div class="mt-8 text-center">
+      <div class="inline-flex items-center bg-blue-50 text-blue-700 px-4 py-2 rounded-lg text-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z" clip-rule="evenodd" />
+        </svg>
+        Hasil ini bersifat sementara dan akan diperbarui secara real-time
+      </div>
     </div>
   </div>
 </section>
@@ -386,7 +527,7 @@
             <li><a href="#kandidat" class="text-slate-400 hover:text-white transition">Kandidat</a></li>
             <li><a href="#langkah" class="text-slate-400 hover:text-white transition">Langkah Voting</a></li>
             <li><a href="#tentang" class="text-slate-400 hover:text-white transition">Tentang</a></li>
-            <li><a href="#faq" class="text-slate-400 hover:text-white transition">FAQ</a></li>
+            <li><a href="#hasil" class="text-slate-400 hover:text-white transition">Hasil</a></li>
           </ul>
         </div>
         <div>

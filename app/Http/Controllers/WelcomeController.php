@@ -36,6 +36,10 @@ class WelcomeController extends Controller
         $jumlahSiswa = Voter::count();
         $jumlahKandidat = Candidate::count();
 
+        // Jumlah yang sudah memilih dan partisipasi (%)
+        $jumlahPemilihMemilih = Voter::where('has_voted', true)->count();
+        $partisipasi = $jumlahSiswa > 0 ? round(($jumlahPemilihMemilih / $jumlahSiswa) * 100) : 0;
+
         // Hitung waktu tersisa dari setting
         $setting = Setting::first();
         $waktuTersisa = 'Selesai';
@@ -47,12 +51,13 @@ class WelcomeController extends Controller
 
         // Kirim ke view
         return view('welcome', compact(
-            'candidates',         // Untuk tampilkan info lengkap kandidat
-            'processedCandidates',// Untuk statistik hasil voting
-            'totalSuara',         // Total semua suara
-            'jumlahSiswa',        // Total pemilih
-            'jumlahKandidat',     // Total kandidat
-            'waktuTersisa'        // Hitung mundur
+            'candidates',
+            'processedCandidates',
+            'totalSuara',
+            'jumlahSiswa',
+            'jumlahKandidat',
+            'waktuTersisa',
+            'partisipasi'
         ));
     }
 }

@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\Session;
 
 class VoteController extends Controller
 {
+    // Form Login Token
     public function showLoginForm()
     {
         return view('vote.login');
     }
 
+    // Proses Login Token
     public function login(Request $request)
     {
         $request->validate([
@@ -32,6 +34,7 @@ class VoteController extends Controller
         return back()->with('error', 'Token tidak ditemukan.');
     }
 
+    // Halaman Voting
     public function showVotePage($token)
     {
         $voter = Voter::where('token', $token)->firstOrFail();
@@ -43,10 +46,10 @@ class VoteController extends Controller
         $candidates = Candidate::all();
         $hasVoted = $voter->has_voted;
 
-        // ✅ Pastikan token dikirim ke view agar tidak undefined
         return view('vote.page', compact('voter', 'candidates', 'hasVoted', 'token'));
     }
 
+    // Proses Simpan Voting
     public function submitVote(Request $request, $token)
     {
         $voter = Voter::where('token', $token)->firstOrFail();
@@ -67,6 +70,8 @@ class VoteController extends Controller
         $voter->has_voted = true;
         $voter->save();
 
-        return back()->with('success', 'Terima kasih sudah memilih!');
+        // Redirect ke halaman utama dengan pesan sukses
+        return redirect()->route('welcome')->with('success', 'Terima kasih sudah memilih!');
     }
+
 }
