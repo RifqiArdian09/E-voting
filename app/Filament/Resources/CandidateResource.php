@@ -24,23 +24,30 @@ class CandidateResource extends Resource
         return $form->schema([
             Forms\Components\TextInput::make('name')
                 ->required()
-                ->label('Nama Kandidat'),
-                
+                ->label('Nama Kandidat')
+                ->maxLength(255),
+
             Forms\Components\Textarea::make('vision')
                 ->required()
                 ->label('Visi')
                 ->columnSpanFull(),
-                
+
             Forms\Components\Textarea::make('mission')
                 ->required()
                 ->label('Misi')
                 ->columnSpanFull(),
-                
+
             Forms\Components\FileUpload::make('photo')
                 ->label('Foto Profil')
                 ->image()
-                ->directory('candidates')
-                ->visibility('public'),
+                ->previewable(true) // agar muncul saat edit
+                ->directory('candidates') // simpan di storage/app/public/candidates
+                ->visibility('public')
+                ->disk('public')
+                ->imageEditor()
+                ->openable()
+                ->downloadable()
+                ->preserveFilenames(),
         ]);
     }
 
@@ -50,17 +57,21 @@ class CandidateResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('photo')
                     ->label('Foto')
-                    ->circular(),
-                    
+                    ->disk('public')
+                    ->visibility('public')
+                    ->circular()
+                    ->defaultImageUrl(url('/storage/default-profile.png')),
+
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')
                     ->sortable()
                     ->searchable(),
-                    
+
                 Tables\Columns\TextColumn::make('votes_count')
                     ->counts('votes')
                     ->label('Total Suara')
-                    ->sortable(),
+                    ->sortable()
+                    ->numeric(),
             ])
             ->filters([])
             ->actions([
@@ -74,7 +85,7 @@ class CandidateResource extends Resource
     public static function getRelations(): array
     {
         return [
-            // Tambahkan relasi jika diperlukan
+            // Tambahkan relasi jika ada
         ];
     }
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -10,13 +9,11 @@ use Illuminate\Support\Facades\Session;
 
 class VoteController extends Controller
 {
-    // Form Login Token
     public function showLoginForm()
     {
         return view('vote.login');
     }
 
-    // Proses Login Token
     public function login(Request $request)
     {
         $request->validate([
@@ -27,6 +24,10 @@ class VoteController extends Controller
         $voter = Voter::where('token', $token)->first();
 
         if ($voter) {
+            if ($voter->has_voted) {
+                return redirect()->route('welcome')->with('error', 'Anda sudah menggunakan hak suara.');
+            }
+
             Session::put('voter_id', $voter->id);
             return redirect()->route('vote.page', ['token' => $token]);
         }
@@ -34,7 +35,6 @@ class VoteController extends Controller
         return back()->with('error', 'Token tidak ditemukan.');
     }
 
-    // Halaman Voting
     public function showVotePage($token)
     {
         $voter = Voter::where('token', $token)->firstOrFail();
@@ -43,13 +43,15 @@ class VoteController extends Controller
             return redirect()->route('vote.login')->with('error', 'Token tidak valid.');
         }
 
-        $candidates = Candidate::all();
-        $hasVoted = $voter->has_voted;
+        if ($voter->has_voted) {
+            return redirect()->route('welcome')->with('error', 'Anda sudah memilih.');
+        }
 
-        return view('vote.page', compact('voter', 'candidates', 'hasVoted', 'token'));
+        $candidates = Candidate::all();
+
+        return view('vote.page', compact('voter', 'candidates', 'token'));
     }
 
-    // Proses Simpan Voting
     public function submitVote(Request $request, $token)
     {
         $voter = Voter::where('token', $token)->firstOrFail();
@@ -70,8 +72,6 @@ class VoteController extends Controller
         $voter->has_voted = true;
         $voter->save();
 
-        // Redirect ke halaman utama dengan pesan sukses
         return redirect()->route('welcome')->with('success', 'Terima kasih sudah memilih!');
     }
-
 }

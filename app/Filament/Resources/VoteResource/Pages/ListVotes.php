@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\VoteResource\Pages;
 
 use App\Filament\Resources\VoteResource;
-use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListVotes extends ListRecords
@@ -12,8 +11,6 @@ class ListVotes extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        return [
-            Actions\CreateAction::make(),
-        ];
+        return []; // Hapus tombol Create di bagian atas
     }
 }
