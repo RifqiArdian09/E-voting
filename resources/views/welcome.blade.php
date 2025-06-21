@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Voting OSIS | SMK Negeri 1 Jakarta</title>
+  <title>Voting OSIS | SMK Negeri 1 </title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -127,7 +127,7 @@
     <div class="max-w-7xl mx-auto px-4 py-16 md:py-24 flex flex-col md:flex-row items-center gap-8 relative z-10">
       <div class="md:w-1/2 animate__animated animate__fadeInLeft">
         <h2 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">Suara Anda Membentuk <span class="gradient-text">Masa Depan Sekolah</span></h2>
-        <p class="mb-6 text-slate-600 text-lg">Partisipasi aktif Anda menentukan arah organisasi siswa di SMK Negeri 1 Jakarta. Setiap suara berharga untuk perubahan yang lebih baik!</p>
+        <p class="mb-6 text-slate-600 text-lg">Partisipasi aktif Anda menentukan arah organisasi siswa di SMK Negeri 1 . Setiap suara berharga untuk perubahan yang lebih baik!</p>
         <div class="flex flex-col sm:flex-row gap-4">
           <a href="#kandidat" class="vote-btn bg-primary text-white px-6 py-3 rounded-lg font-semibold text-center">Lihat Kandidat</a>
           <a href="#vote" class="bg-white text-primary border border-primary px-6 py-3 rounded-lg font-semibold text-center hover:bg-primary hover:text-white transition">Vote Sekarang</a>
@@ -305,7 +305,7 @@
     <div class="max-w-4xl mx-auto text-center">
       <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl">
         <h3 class="text-3xl font-bold mb-6">Siap Menggunakan Hak Pilih Anda?</h3>
-        <p class="mb-8 text-white/90 max-w-2xl mx-auto">Pemilihan akan ditutup dalam 24 jam. Pastikan suara Anda menentukan masa depan OSIS SMK Negeri 1 Jakarta!</p>
+        <p class="mb-8 text-white/90 max-w-2xl mx-auto">Pemilihan akan ditutup dalam 24 jam. Pastikan suara Anda menentukan masa depan OSIS SMK Negeri 1 !</p>
         <a href="#" class="inline-block bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg transform hover:scale-105">Vote Sekarang</a>
       </div>
     </div>
@@ -320,7 +320,7 @@
         </div>
         <div class="md:w-1/2">
           <h3 class="text-3xl font-bold text-primary mb-6">Tentang E-Voting OSIS</h3>
-          <p class="text-slate-600 mb-4">Sistem E-Voting OSIS SMK Negeri 1 Jakarta adalah platform digital yang dikembangkan untuk memudahkan proses pemilihan ketua OSIS secara transparan, akuntabel, dan efisien.</p>
+          <p class="text-slate-600 mb-4">Sistem E-Voting OSIS SMK Negeri 1  adalah platform digital yang dikembangkan untuk memudahkan proses pemilihan ketua OSIS secara transparan, akuntabel, dan efisien.</p>
           <p class="text-slate-600 mb-6">Dengan sistem ini, seluruh siswa dapat memberikan suara secara online tanpa harus mengantri di tempat pemungutan suara, sekaligus mengurangi penggunaan kertas (paperless).</p>
           <div class="space-y-3">
             <div class="flex items-start">
@@ -403,7 +403,7 @@
             </svg>
             <h3 class="text-xl font-bold">E-Vote<span class="font-light">OSIS</span></h3>
           </div>
-          <p class="text-slate-400 text-sm">Platform digital untuk pemilihan ketua OSIS SMK Negeri 1 Jakarta.</p>
+          <p class="text-slate-400 text-sm">Platform digital untuk pemilihan ketua OSIS SMK Negeri 1 .</p>
         </div>
         <div>
           <h4 class="font-semibold text-lg mb-4">Tautan Cepat</h4>
@@ -427,14 +427,14 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              evoting@smkn1jakarta.sch.id
+              evoting@smkn1.sch.id
             </li>
             <li class="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              Jl. Pendidikan No. 123, Jakarta
+              Jl. Pendidikan No. 123, 
             </li>
           </ul>
         </div>
@@ -460,7 +460,7 @@
         </div>
       </div>
       <div class="border-t border-slate-800 mt-8 pt-8 text-center text-slate-400 text-sm">
-        <p>&copy; 2025 E-Voting OSIS | SMK Negeri 1 Jakarta. All rights reserved.</p>
+        <p>&copy; 2025 E-Voting OSIS | SMK Negeri 1 . All rights reserved.</p>
       </div>
     </div>
   </footer>
