@@ -9,6 +9,14 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use App\Filament\Exports\VoterExporter;
+use Filament\Tables\Actions\ExportAction;
+use App\Filament\Imports\VoterImporter;
+use Filament\Tables\Actions\ImportAction;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Actions\ViewAction;
+
+
 
 class VoterResource extends Resource
 {
@@ -89,10 +97,16 @@ class VoterResource extends Resource
             ])
             ->filters([])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
+            ])
+            ->headerActions([
+                ExportAction::make()->exporter(VoterExporter::class),
+                ImportAction::make()->importer(VoterImporter::class),
+                
+                
             ]);
     }
 
@@ -101,7 +115,7 @@ class VoterResource extends Resource
         return [
             'index' => Pages\ListVoters::route('/'),
             'create' => Pages\CreateVoter::route('/create'),
-            'edit' => Pages\EditVoter::route('/{record}/edit'),
+            
         ];
     }
 }

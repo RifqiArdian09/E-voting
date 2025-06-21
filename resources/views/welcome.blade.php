@@ -111,7 +111,7 @@
         <li><a href="#kandidat" class="nav-link text-sm font-medium hover:text-primary">Kandidat</a></li>
         <li><a href="#langkah" class="nav-link text-sm font-medium hover:text-primary">Langkah</a></li>
         <li><a href="#tentang" class="nav-link text-sm font-medium hover:text-primary">Tentang</a></li>
-        <li><a href="#footer" class="nav-link text-sm font-medium hover:text-primary">Kontak</a></li>
+        <li><a href="#footer" class="nav-link text-sm font-medium hover:text-primary">Hasil</a></li>
         <li><a href="#vote" class="bg-primary px-4 py-2 rounded-lg text-sm font-semibold text-white hover:bg-blue-600 transition shadow-md">Vote Sekarang</a></li>
       </ul>
       <button class="md:hidden text-slate-600">
@@ -142,136 +142,72 @@
     </div>
   </section>
 
-  <!-- Stats Section -->
-  <section class="bg-gradient-to-r from-primary to-accent text-white py-12">
-    <div class="max-w-7xl mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-        <div class="glass-card p-6 rounded-xl">
-          <h3 class="text-4xl font-bold mb-2">1,245</h3>
-          <p class="text-white text-opacity-90">Siswa Terdaftar</p>
-        </div>
-        <div class="glass-card p-6 rounded-xl">
-          <h3 class="text-4xl font-bold mb-2">3</h3>
-          <p class="text-white text-opacity-90">Kandidat Unggulan</p>
-        </div>
-        <div class="glass-card p-6 rounded-xl">
-          <h3 class="text-4xl font-bold mb-2">24</h3>
-          <p class="text-white text-opacity-90">Jam Tersisa</p>
-        </div>
+ <!-- Stats Section -->
+<section class="bg-gradient-to-r from-primary to-accent text-white py-12">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <div class="glass-card p-6 rounded-xl">
+        <h3 class="text-4xl font-bold mb-2">{{ number_format($jumlahSiswa) }}</h3>
+        <p class="text-white text-opacity-90">Siswa Terdaftar</p>
+      </div>
+      <div class="glass-card p-6 rounded-xl">
+        <h3 class="text-4xl font-bold mb-2">{{ $jumlahKandidat }}</h3>
+        <p class="text-white text-opacity-90">Kandidat Unggulan</p>
+      </div>
+      <div class="glass-card p-6 rounded-xl">
+        <h3 class="text-2xl font-semibold mb-2">{{ $waktuTersisa }}</h3>
+        <p class="text-white text-opacity-90">Waktu Tersisa</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Section Kandidat -->
-  <section id="kandidat" class="py-16 px-4 bg-white">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-12">
-        <h3 class="text-3xl font-bold text-primary mb-4">Kandidat Ketua OSIS</h3>
-        <p class="text-slate-600 max-w-2xl mx-auto">Kenali visi, misi, dan program kerja calon ketua OSIS periode 2025/2026</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Kandidat 1 -->
-        <div class="neumorphic rounded-xl overflow-hidden card-hover">
-          <div class="relative">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Kandidat 1" class="w-full h-64 object-cover">
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent h-20"></div>
-            <div class="absolute bottom-4 left-4">
-              <h4 class="text-xl font-bold text-white">Ahmad Fauzi</h4>
-              <p class="text-sm text-gray-200">XII TKJ 1</p>
-            </div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-100 text-primary text-xs font-semibold px-2.5 py-0.5 rounded">Nomor Urut 1</span>
-            </div>
-            <p class="text-slate-600 mb-4 italic">"Mewujudkan sekolah inovatif dengan teknologi dan meningkatkan partisipasi siswa."</p>
-            <div class="space-y-3 mb-6">
-              <div class="flex items-start">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span class="text-sm">Digitalisasi organisasi</span>
-              </div>
-              <div class="flex items-start">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span class="text-sm">Penguatan ekstrakurikuler</span>
-              </div>
-            </div>
-            <a href="#vote" class="block w-full text-center bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-600 transition">Pilih Kandidat Ini</a>
-          </div>
-        </div>
 
-        <!-- Kandidat 2 -->
-        <div class="neumorphic rounded-xl overflow-hidden card-hover transform transition duration-500 hover:scale-[1.02]">
-          <div class="relative">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Kandidat 2" class="w-full h-64 object-cover">
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent h-20"></div>
-            <div class="absolute bottom-4 left-4">
-              <h4 class="text-xl font-bold text-white">Siti Aminah</h4>
-              <p class="text-sm text-gray-200">XII MM 2</p>
-            </div>
-            <div class="absolute top-4 right-4 bg-secondary text-white text-xs font-bold px-2 py-1 rounded-full shadow">Favorit</div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-100 text-primary text-xs font-semibold px-2.5 py-0.5 rounded">Nomor Urut 2</span>
-            </div>
-            <p class="text-slate-600 mb-4 italic">"Membangun budaya sekolah yang kreatif, inklusif, dan berkarakter."</p>
-            <div class="space-y-3 mb-6">
-              <div class="flex items-start">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span class="text-sm">Program seni & budaya</span>
-              </div>
-              <div class="flex items-start">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span class="text-sm">Pengembangan bakat siswa</span>
-              </div>
-            </div>
-            <a href="#vote" class="block w-full text-center bg-secondary text-white px-4 py-2 rounded-lg font-medium hover:bg-amber-600 transition">Pilih Kandidat Ini</a>
-          </div>
-        </div>
 
-        <!-- Kandidat 3 -->
-        <div class="neumorphic rounded-xl overflow-hidden card-hover">
-          <div class="relative">
-            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Kandidat 3" class="w-full h-64 object-cover">
-            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent h-20"></div>
-            <div class="absolute bottom-4 left-4">
-              <h4 class="text-xl font-bold text-white">Budi Santoso</h4>
-              <p class="text-sm text-gray-200">XII RPL 1</p>
-            </div>
-          </div>
-          <div class="p-6">
-            <div class="flex items-center mb-4">
-              <span class="bg-blue-100 text-primary text-xs font-semibold px-2.5 py-0.5 rounded">Nomor Urut 3</span>
-            </div>
-            <p class="text-slate-600 mb-4 italic">"Mengoptimalkan potensi siswa melalui kegiatan akademik dan non-akademik."</p>
-            <div class="space-y-3 mb-6">
-              <div class="flex items-start">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span class="text-sm">Peningkatan prestasi akademik</span>
-              </div>
-              <div class="flex items-start">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                </svg>
-                <span class="text-sm">Kompetisi sains & teknologi</span>
-              </div>
-            </div>
-            <a href="#vote" class="block w-full text-center bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-600 transition">Pilih Kandidat Ini</a>
-          </div>
-        </div>
-      </div>
+<!-- Section Kandidat -->
+<section id="kandidat" class="py-16 px-4 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <h3 class="text-3xl font-bold text-primary mb-4">Kandidat Ketua OSIS</h3>
+      <p class="text-slate-600 max-w-2xl mx-auto">Kenali visi, misi, dan program kerja calon ketua OSIS periode 2025/2026</p>
     </div>
-  </section>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      @foreach ($candidates as $index => $candidate)
+      <div class="neumorphic rounded-xl overflow-hidden card-hover transform transition duration-500 hover:scale-[1.02]">
+        <div class="relative">
+          <img src="{{ asset('storage/' . $candidate->photo) }}" alt="{{ $candidate->name }}" class="w-full h-64 object-cover">
+          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent h-20"></div>
+          <div class="absolute bottom-4 left-4">
+            <h4 class="text-xl font-bold text-white">{{ $candidate->name }}</h4>
+            <p class="text-sm text-gray-200">Kelas belum ditentukan</p>
+          </div>
+          @if ($index === 1)
+          <div class="absolute top-4 right-4 bg-secondary text-white text-xs font-bold px-2 py-1 rounded-full shadow">Favorit</div>
+          @endif
+        </div>
+        <div class="p-6">
+          <div class="flex items-center mb-4">
+            <span class="bg-blue-100 text-primary text-xs font-semibold px-2.5 py-0.5 rounded">Nomor Urut {{ $index + 1 }}</span>
+          </div>
+          <p class="text-slate-600 mb-4 italic">"{{ $candidate->vision }}"</p>
+          <div class="space-y-3 mb-6">
+            @foreach (explode("\n", $candidate->mission) as $point)
+            <div class="flex items-start">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-sm">{{ $point }}</span>
+            </div>
+            @endforeach
+          </div>
+          <a href="#vote" class="block w-full text-center bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-600 transition">Pilih Kandidat Ini</a>
+        </div>
+      </div>
+      @endforeach
+    </div>
+  </div>
+</section>
+
 
   <!-- Langkah-langkah -->
   <section id="langkah" class="py-16 px-4 bg-slate-50">
@@ -306,7 +242,7 @@
       <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl">
         <h3 class="text-3xl font-bold mb-6">Siap Menggunakan Hak Pilih Anda?</h3>
         <p class="mb-8 text-white/90 max-w-2xl mx-auto">Pemilihan akan ditutup dalam 24 jam. Pastikan suara Anda menentukan masa depan OSIS SMK Negeri 1 !</p>
-        <a href="#" class="inline-block bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg transform hover:scale-105">Vote Sekarang</a>
+        <a href="{{ route('vote.login') }}" class="inline-block bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg transform hover:scale-105">Vote Sekarang</a>
       </div>
     </div>
   </section>
@@ -347,50 +283,89 @@
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="py-16 px-4 bg-slate-50">
-    <div class="max-w-4xl mx-auto">
-      <div class="text-center mb-12">
-        <h3 class="text-3xl font-bold text-primary mb-4">Pertanyaan Umum</h3>
-        <p class="text-slate-600">Temukan jawaban atas pertanyaan yang sering diajukan</p>
+<!-- Hasil Voting Section -->
+<section class="py-16 px-4 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <h3 class="text-3xl font-bold text-primary mb-4">Hasil Voting Sementara</h3>
+      <p class="text-slate-600 max-w-2xl mx-auto">Lihat perkembangan hasil pemilihan ketua OSIS secara real-time</p>
+    </div>
+
+    <!-- Diagram Batang -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+      <div class="bg-white p-6 rounded-xl shadow-sm">
+        <h4 class="font-semibold text-lg mb-4 text-center">Perolehan Suara</h4>
+        <div class="h-64 flex items-end justify-center space-x-4">
+          @foreach ($processedCandidates as $item)
+            <div class="flex flex-col items-center">
+              <div class="w-12 bg-primary rounded-t-md transition-all duration-500" style="height: {{ $item['percentage'] }}%;"></div>
+              <span class="text-xs mt-2">{{ $item['name'] }}</span>
+              <span class="text-sm font-semibold">{{ $item['percentage'] }}%</span>
+            </div>
+          @endforeach
+        </div>
       </div>
-      <div class="space-y-4">
-        <div class="bg-white p-6 rounded-xl shadow-sm">
-          <button class="flex justify-between items-center w-full text-left">
-            <h4 class="font-semibold text-slate-800">Bagaimana cara memastikan suara saya tercatat?</h4>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
-          </button>
-          <div class="mt-3 text-slate-600 hidden">
-            <p>Setelah memilih kandidat, sistem akan menampilkan konfirmasi bahwa pilihan Anda telah tercatat. Anda juga akan menerima notifikasi email sebagai bukti.</p>
-          </div>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow-sm">
-          <button class="flex justify-between items-center w-full text-left">
-            <h4 class="font-semibold text-slate-800">Apakah saya bisa mengubah pilihan setelah submit?</h4>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
-          </button>
-          <div class="mt-3 text-slate-600 hidden">
-            <p>Tidak, setelah Anda mengkonfirmasi pilihan, suara tidak dapat diubah untuk menjaga integritas pemilihan.</p>
-          </div>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow-sm">
-          <button class="flex justify-between items-center w-full text-left">
-            <h4 class="font-semibold text-slate-800">Kapan hasil pemilihan akan diumumkan?</h4>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
-          </button>
-          <div class="mt-3 text-slate-600 hidden">
-            <p>Hasil pemilihan akan diumumkan secara resmi dalam upacara sekolah 3 hari setelah pemilihan ditutup.</p>
-          </div>
-        </div>
+
+      <!-- Ring Diagram Placeholder -->
+      <div class="bg-white p-6 rounded-xl shadow-sm text-center">
+        <h4 class="font-semibold text-lg mb-4 text-center">Total Suara</h4>
+        <div class="text-6xl font-bold text-primary">{{ number_format($totalSuara) }}</div>
+        <div class="mt-2 text-slate-500 text-sm">Data akan diperbarui secara real-time</div>
       </div>
     </div>
-  </section>
+
+    <!-- Tabel Hasil Detail -->
+    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-slate-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Kandidat</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Jumlah Suara</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Persentase</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          @foreach ($processedCandidates as $item)
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 h-10 w-10">
+                  <img class="h-10 w-10 rounded-full" src="{{ asset('storage/' . $item['photo']) }}" alt="{{ $item['name'] }}">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium text-slate-900">{{ $item['name'] }}</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 text-sm text-slate-500">{{ number_format($item['votes']) }}</td>
+            <td class="px-6 py-4">
+              <div class="flex items-center">
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                  <div class="bg-primary h-2.5 rounded-full" style="width: {{ $item['percentage'] }}%"></div>
+                </div>
+                <span class="ml-2 text-sm font-medium text-slate-500">{{ $item['percentage'] }}%</span>
+              </div>
+            </td>
+          </tr>
+          @endforeach
+        </tbody>
+        <tfoot class="bg-slate-50">
+          <tr>
+            <td class="px-6 py-4 text-sm font-medium text-slate-900">Total</td>
+            <td class="px-6 py-4 text-sm font-medium text-slate-900">{{ number_format($totalSuara) }}</td>
+            <td class="px-6 py-4 text-sm font-medium text-slate-900">100%</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Catatan -->
+    <div class="mt-6 text-center text-sm text-slate-500">
+      <p>Hasil ini bersifat sementara dan akan diperbarui secara real-time. Hasil final akan diumumkan setelah pemilihan berakhir.</p>
+    </div>
+  </div>
+</section>
+
 
   <!-- Footer -->
   <footer id="footer" class="bg-slate-900 text-white py-12 px-4">
@@ -464,27 +439,5 @@
       </div>
     </div>
   </footer>
-
-  <script>
-    // FAQ toggle functionality
-    document.querySelectorAll('section#faq button').forEach(button => {
-      button.addEventListener('click', () => {
-        const answer = button.nextElementSibling;
-        answer.classList.toggle('hidden');
-        
-        const icon = button.querySelector('svg');
-        if (answer.classList.contains('hidden')) {
-          icon.innerHTML = '<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />';
-        } else {
-          icon.innerHTML = '<path fill-rule="evenodd" d="M5.293 15.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L10 11.414l-3.293 3.293a1 1 0 01-1.414 0z" clip-rule="evenodd" />';
-        }
-      });
-    });
-
-    // Mobile menu toggle (placeholder)
-    document.querySelector('nav button').addEventListener('click', () => {
-      alert('Mobile menu would open here');
-    });
-  </script>
 </body>
 </html>
