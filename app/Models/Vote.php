@@ -3,10 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Vote extends Model
 {
-    protected $fillable = ['voter_id', 'candidate_id'];
+    use HasFactory;
+
+    protected $fillable = [
+        'voter_id', 'candidate_id',
+    ];
 
     public function voter()
     {

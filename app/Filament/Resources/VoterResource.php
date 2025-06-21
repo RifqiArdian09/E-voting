@@ -22,23 +22,30 @@ class VoterResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
+            Forms\Components\TextInput::make('nisn')
+                ->label('NISN')
+                ->required()
+                ->maxLength(20)
+                ->unique(ignoreRecord: true),
+
             Forms\Components\TextInput::make('name')
                 ->label('Nama Lengkap')
                 ->required()
                 ->maxLength(255),
-                
-            Forms\Components\TextInput::make('email')
-                ->label('Alamat Email')
-                ->email()
-                ->required()
-                ->maxLength(255),
-                
-            Forms\Components\TextInput::make('token')
+
+            Forms\Components\TextInput::make('class')
+                ->label('Kelas')
+                ->required(),
+
+            Forms\Components\TextInput::make('major')
+                ->label('Jurusan')
+                ->required(),
+
+                Forms\Components\TextInput::make('token')
                 ->label('Token Voting')
-                ->required()
-                ->maxLength(64)
-                ->unique(ignoreRecord: true),
-                
+                ->disabled()
+                ->dehydrated(),            
+
             Forms\Components\Toggle::make('has_voted')
                 ->label('Sudah Memilih')
                 ->onColor('success')
@@ -50,20 +57,28 @@ class VoterResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('nisn')
+                    ->label('NISN')
+                    ->sortable()
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama')
                     ->sortable()
                     ->searchable(),
-                    
-                Tables\Columns\TextColumn::make('email')
-                    ->label('Email')
-                    ->sortable()
-                    ->searchable(),
-                    
+
+                Tables\Columns\TextColumn::make('class')
+                    ->label('Kelas')
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('major')
+                    ->label('Jurusan')
+                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('token')
                     ->label('Token')
                     ->searchable(),
-                    
+
                 Tables\Columns\IconColumn::make('has_voted')
                     ->label('Status')
                     ->boolean()
