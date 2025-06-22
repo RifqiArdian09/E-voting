@@ -105,7 +105,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <h1 class="text-xl font-bold text-primary">E-Vote<span class="font-light text-slate-600">OSIS</span></h1>
+        <h1 class="text-xl font-bold text-primary">E-Voting</h1>
       </div>
       <ul class="hidden md:flex gap-8 items-center">
         <li><a href="#kandidat" class="nav-link text-sm font-medium hover:text-primary">Kandidat</a></li>
@@ -635,7 +635,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <h3 class="text-xl font-bold">E-Vote<span class="font-light">OSIS</span></h3>
+            <h3 class="text-xl font-bold">E-Voting</h3>
           </div>
           <p class="text-slate-400 text-sm">Platform digital untuk pemilihan ketua OSIS SMK Negeri 1 .</p>
         </div>
@@ -661,7 +661,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              evoting@smkn1.sch.id
+              evoting@example.sch.id
             </li>
             <li class="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -694,7 +694,7 @@
         </div>
       </div>
       <div class="border-t border-slate-800 mt-8 pt-8 text-center text-slate-400 text-sm">
-        <p>&copy; 2025 E-Voting OSIS | SMK Negeri 1 . All rights reserved.</p>
+        <p>&copy; 2025 E-Voting | Rifqi Ardian. All rights reserved.</p>
       </div>
     </div>
   </footer>
