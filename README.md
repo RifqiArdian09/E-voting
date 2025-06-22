@@ -4,12 +4,12 @@ Aplikasi pemilihan ketua OSIS berbasis web dengan fitur autentikasi pemilih, vot
 
 ## Fitur Utama
 
-✅ Sistem voting online dengan token unik  
-✅ Tampilan kandidat dengan visi & misi  
-✅ Hasil voting real-time dengan visualisasi grafik  
-✅ Batas waktu voting yang bisa dikonfigurasi  
-✅ Sistem one-vote-per-user  
-✅ Admin panel untuk manajemen data  
+- Sistem voting online dengan token unik  
+- Tampilan kandidat dengan visi & misi  
+- Hasil voting real-time dengan visualisasi grafik  
+- Batas waktu voting yang bisa dikonfigurasi  
+- Sistem one-vote-per-user  
+- Admin panel untuk manajemen data  
 
 ## Teknologi
 
