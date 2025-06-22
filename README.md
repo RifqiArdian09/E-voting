@@ -1,22 +1,22 @@
-# E-Voting OSIS 
+# 🗳️ E-Voting OSIS
 
-Aplikasi pemilihan ketua OSIS berbasis web dengan fitur autentikasi pemilih, voting aman, dan hasil real-time.
+Aplikasi pemilihan Ketua OSIS berbasis web dengan sistem voting yang **aman**, **mudah digunakan**, dan **real-time**.
 
-## Fitur Utama
+## ✨ Fitur Utama
 
-- Sistem voting online dengan token unik  
-- Tampilan kandidat dengan visi & misi  
-- Hasil voting real-time dengan visualisasi grafik  
-- Batas waktu voting yang bisa dikonfigurasi  
-- Sistem one-vote-per-user  
-- Admin panel untuk manajemen data  
+- ✅ Voting online dengan **token unik** per pemilih  
+- 👤 Tampilan kandidat lengkap dengan **foto, visi & misi**  
+- 📊 **Hasil voting real-time** dengan grafik interaktif  
+- ⏳ Pengaturan **batas waktu voting** yang fleksibel  
+- 🔐 Sistem **satu pemilih satu suara**  
+- ⚙️ Panel admin (Filament) untuk **manajemen data kandidat & pemilih**
 
-## Teknologi
+## 🛠️ Teknologi yang Digunakan
 
-- **Backend**: Laravel 12
-- **Frontend**: Tailwind CSS, Alpine.js
-- **Admin Panel**: Filament PHP
-- **Database**: MySQL
+- **Backend**: Laravel 12  
+- **Frontend**: Tailwind CSS, Alpine.js  
+- **Admin Panel**: Filament PHP  
+- **Database**: MySQL  
 
 
 ## ⚙️ Setup Guide
