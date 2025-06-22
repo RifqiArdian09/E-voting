@@ -60,4 +60,19 @@ class WelcomeController extends Controller
             'partisipasi'
         ));
     }
+
+    // ✅ Tambahan untuk detail kandidat
+    public function show($id)
+    {
+        $candidate = Candidate::findOrFail($id);
+
+        return response()->json([
+            'id' => $candidate->id,
+            'name' => $candidate->name,
+            'photo' => asset('storage/' . $candidate->photo),
+            'vision' => $candidate->vision,
+            'mission' => explode("\n", $candidate->mission),
+            'votes' => $candidate->votes()->count(),
+        ]);
+    }
 }

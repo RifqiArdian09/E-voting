@@ -15,4 +15,4 @@ Route::get('/vote/{token}', [VoteController::class, 'showVotePage'])->name('vote
 Route::post('/vote/{token}', [VoteController::class, 'submitVote'])->name('vote.submit');
 
 Route::get('/vote/results', [VoteController::class, 'showHasil'])->name('vote.hasil');
-
+Route::get('/candidates/{id}', [WelcomeController::class, 'show'])->name('candidate.show');

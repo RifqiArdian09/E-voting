@@ -7,36 +7,29 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
-        
         .login-container {
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             border-radius: 1rem;
             overflow: hidden;
         }
-        
         .illustration {
             background: linear-gradient(to right, #2563eb, #3b82f6);
         }
-        
         .input-field {
             transition: all 0.3s ease;
             border: 1px solid #e2e8f0;
         }
-        
         .input-field:focus {
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
         }
-        
         .login-btn {
             transition: all 0.3s ease;
             background: linear-gradient(to right, #2563eb, #3b82f6);
         }
-        
         .login-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
@@ -45,22 +38,21 @@
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
     <div class="login-container bg-white w-full max-w-4xl flex flex-col md:flex-row">
-        <!-- Bagian Kiri (Gambar) -->
+        <!-- Ilustrasi -->
         <div class="illustration hidden md:flex flex-col items-center justify-center p-8 md:w-1/2 text-white">
             <img src="{{ asset('images/vote.png') }}" alt="Voting Illustration" class="w-full max-w-xs mb-6">
             <h2 class="text-2xl font-bold mb-2">Pemilihan OSIS Digital</h2>
             <p class="text-center text-blue-100">Gunakan hak pilih Anda untuk menentukan masa depan sekolah</p>
-            
         </div>
-        
-        <!-- Bagian Kanan (Form) -->
+
+        <!-- Form Login -->
         <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
             <div class="text-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <h1 class="text-3xl font-bold mt-2 text-gray-800">Login E-Voting</h1>
-                <p class="text-gray-600 mt-2">Masukkan token voting Anda</p>
+                <p class="text-gray-600 mt-2">Masukkan NISN dan token voting Anda</p>
             </div>
 
             @if(session('error'))
@@ -76,6 +68,15 @@
 
             <form method="POST" action="{{ route('vote.login') }}" class="space-y-6">
                 @csrf
+                <!-- NISN -->
+                <div>
+                    <label for="nisn" class="block text-sm font-medium text-gray-700 mb-1">NISN</label>
+                    <input type="text" name="nisn" id="nisn" required 
+                           class="input-field w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                           placeholder="Masukkan NISN Anda">
+                </div>
+
+                <!-- Token -->
                 <div>
                     <label for="token" class="block text-sm font-medium text-gray-700 mb-1">Token Voting</label>
                     <div class="relative">
@@ -89,10 +90,16 @@
                         </div>
                     </div>
                 </div>
-                
-                <button type="submit" class="login-btn w-full text-white py-3 px-4 rounded-lg font-semibold">
-                    Masuk ke Sistem Voting
-                </button>
+
+                <!-- Tombol -->
+                <div class="flex flex-col space-y-3">
+                    <button type="submit" class="login-btn w-full text-white py-3 px-4 rounded-lg font-semibold">
+                        Masuk ke Sistem Voting
+                    </button>
+                    <a href="{{ url('/') }}" class="w-full text-center py-2 text-blue-600 hover:underline text-sm">
+                        ← Kembali ke Beranda
+                    </a>
+                </div>
             </form>
         </div>
     </div>

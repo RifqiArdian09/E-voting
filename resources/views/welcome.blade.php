@@ -189,52 +189,170 @@
   </div>
 </section>
 
-
-
-<!-- Section Kandidat -->
-<section id="kandidat" class="py-16 px-4 bg-white">
-  <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-12">
-      <h3 class="text-3xl font-bold text-primary mb-4">Kandidat Ketua OSIS</h3>
-      <p class="text-slate-600 max-w-2xl mx-auto">Kenali visi, misi, dan program kerja calon ketua OSIS periode 2025/2026</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      @foreach ($candidates as $index => $candidate)
-      <div class="neumorphic rounded-xl overflow-hidden card-hover transform transition duration-500 hover:scale-[1.02]">
-        <div class="relative">
-          <img src="{{ asset('storage/' . $candidate->photo) }}" alt="{{ $candidate->name }}" class="w-full h-64 object-cover">
-          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent h-20"></div>
-          <div class="absolute bottom-4 left-4">
-            <h4 class="text-xl font-bold text-white">{{ $candidate->name }}</h4>
-            <p class="text-sm text-gray-200">Kelas belum ditentukan</p>
-          </div>
-          @if ($index === 1)
-          <div class="absolute top-4 right-4 bg-secondary text-white text-xs font-bold px-2 py-1 rounded-full shadow">Favorit</div>
-          @endif
+<section id="kandidat" class="py-16 px-4 bg-white" x-data="{ selected: null }">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <h3 class="text-3xl font-bold text-primary mb-4">Kandidat Ketua OSIS</h3>
+            <p class="text-slate-600 max-w-2xl mx-auto">
+                Kenali visi, misi, dan program kerja calon ketua OSIS periode 2025/2026
+            </p>
         </div>
-        <div class="p-6">
-          <div class="flex items-center mb-4">
-            <span class="bg-blue-100 text-primary text-xs font-semibold px-2.5 py-0.5 rounded">Nomor Urut {{ $index + 1 }}</span>
-          </div>
-          <p class="text-slate-600 mb-4 italic">"{{ $candidate->vision }}"</p>
-          <div class="space-y-3 mb-6">
-            @foreach (explode("\n", $candidate->mission) as $point)
-            <div class="flex items-start">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-              </svg>
-              <span class="text-sm">{{ $point }}</span>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            @php
+                // Find the candidate with the most votes
+                $mostVotes = $candidates->max('votes_count');
+                $favoriteCandidateId = $candidates->firstWhere('votes_count', $mostVotes)->id;
+            @endphp
+            
+            @foreach ($candidates as $index => $candidate)
+            <div class="group relative bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                <!-- Ribbon for favorite (now based on votes) -->
+                @if ($candidate->id === $favoriteCandidateId && $mostVotes > 0)
+                <div class="absolute top-0 right-0 bg-secondary text-white text-xs font-bold px-3 py-1 rounded-bl-lg shadow-md z-10">
+                    Favorit
+                </div>
+                @endif
+                
+                <!-- Candidate Image -->
+                <div class="relative h-64 w-full overflow-hidden">
+                    <div class="h-full w-full flex items-center justify-center bg-gray-100">
+                        <img src="{{ asset('storage/' . $candidate->photo) }}" alt="{{ $candidate->name }}" 
+                             class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
+                             style="object-position: center">
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4">
+                        <h4 class="text-xl font-bold text-white">{{ $candidate->name }}</h4>
+                    </div>
+                    <div class="absolute top-3 left-3 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm">
+                        No. {{ $index + 1 }}
+                    </div>
+                </div>
+                
+                <!-- Candidate Info -->
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-lg font-semibold text-gray-800 truncate">{{ $candidate->name }}</h4>
+                        <span class="text-xs bg-blue-100 text-primary px-2 py-1 rounded-full">
+                            {{ $candidate->votes_count ?? 0 }} Suara
+                        </span>
+                    </div>
+                    
+                    <p class="text-slate-600 mb-4 italic text-sm line-clamp-2">"{{ $candidate->vision }}"</p>
+                    
+                    <div class="space-y-2 mb-6">
+                        @foreach (array_slice(explode("\n", $candidate->mission), 0, 3) as $point)
+                        <div class="flex items-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary mt-1 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-xs text-gray-600 line-clamp-2">{{ $point }}</span>
+                        </div>
+                        @endforeach
+                    </div>
+                    
+                    <div class="flex space-x-3">
+                        <button 
+                            @click="selected = {{ $candidate->id }}" 
+                            class="flex-1 text-center bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-600 transition flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            </svg>
+                            Detail
+                        </button>
+                        <a href="{{ route('vote.login') }}" class="flex-1 text-center border border-primary text-primary px-4 py-2 rounded-lg font-medium hover:bg-blue-50 transition flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                            </svg>
+                            Vote
+                        </a>
+                    </div>
+                </div>
             </div>
             @endforeach
-          </div>
-          <a href="#vote" class="block w-full text-center bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-600 transition">Pilih Kandidat Ini</a>
         </div>
-      </div>
-      @endforeach
     </div>
-  </div>
-</section>
 
+    <!-- Modal Popup -->
+    @foreach ($candidates as $candidate)
+    <div 
+        x-show="selected === {{ $candidate->id }}" 
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4"
+        style="display: none"
+    >
+        <div 
+            @click.away="selected = null" 
+            class="bg-white w-full max-w-2xl rounded-xl shadow-2xl relative max-h-[90vh] overflow-hidden"
+        >
+            <button @click="selected = null" class="absolute top-4 right-4 z-10 bg-white/80 hover:bg-white text-gray-600 hover:text-red-600 rounded-full p-2 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            
+            <div class="relative h-96 w-full overflow-hidden">
+                <div class="h-full w-full flex items-center justify-center bg-gray-100">
+                    <img src="{{ asset('storage/' . $candidate->photo) }}" alt="{{ $candidate->name }}" 
+                         class="object-cover w-full h-full"
+                         style="object-position: center">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-6">
+                    <h2 class="text-2xl font-bold text-white">{{ $candidate->name }}</h2>
+                    @if ($candidate->id === $favoriteCandidateId && $mostVotes > 0)
+                    <div class="inline-flex items-center mt-2 bg-secondary/90 text-white text-xs font-bold px-2 py-1 rounded">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                        </svg>
+                        Kandidat Favorit
+                    </div>
+                    @endif
+                </div>
+            </div>
+            
+            <div class="p-6 overflow-y-auto" style="max-height: calc(90vh - 24rem)">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
+                        Nomor Urut {{ $loop->iteration }}
+                    </div>
+                    <div class="text-sm bg-blue-100 text-primary px-3 py-1 rounded-full">
+                        {{ $candidate->votes_count ?? 0 }} Suara
+                    </div>
+                </div>
+                
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Visi</h3>
+                <p class="italic text-slate-600 mb-6 px-4 py-3 bg-gray-50 rounded-lg">"{{ $candidate->vision }}"</p>
+
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Misi</h3>
+                <ul class="space-y-3">
+                    @foreach (explode("\n", $candidate->mission) as $point)
+                    <li class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary mt-0.5 mr-3 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="text-slate-600">{{ $point }}</span>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+            
+            <div class="p-6 border-t border-gray-100">
+                <a href="{{ route('vote.login') }}" class="block w-full text-center bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition shadow-md">
+                    Berikan Suara untuk {{ $candidate->name }}
+                </a>
+            </div>
+        </div>
+    </div>
+    @endforeach
+</section>
 
   <!-- Langkah-langkah -->
   <section id="langkah" class="py-16 px-4 bg-slate-50">
@@ -580,5 +698,8 @@
       </div>
     </div>
   </footer>
+
+  <!-- Alpine JS -->
+  <script src="//unpkg.com/alpinejs" defer></script>
 </body>
 </html>
