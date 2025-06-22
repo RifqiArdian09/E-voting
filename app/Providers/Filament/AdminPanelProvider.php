@@ -37,8 +37,6 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
                 \App\Filament\Widgets\VotingStatsWidget::class,
                 \App\Filament\Widgets\VotingBarChartWidget::class,
                 \App\Filament\Widgets\CandidatesTable::class,
