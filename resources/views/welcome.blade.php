@@ -163,7 +163,7 @@
       <div class="md:w-1/2 animate__animated animate__fadeInRight">
         <div class="relative">
           <div class="w-full max-w-lg mx-auto ">
-            <img src="{{ asset('images/voting.svg') }}" alt="Students voting" class="w-full h-auto">
+            <img src="{{ asset('images/ic-hero.png') }}" alt="Students voting" class="w-full h-auto">
           </div>
       </div>
     </div>

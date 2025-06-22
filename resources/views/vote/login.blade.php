@@ -97,7 +97,7 @@
                         Masuk ke Sistem Voting
                     </button>
                     <a href="{{ url('/') }}" class="w-full text-center py-2 text-blue-600 hover:underline text-sm">
-                        ← Kembali ke Beranda
+                        Kembali ke Beranda
                     </a>
                 </div>
             </form>
