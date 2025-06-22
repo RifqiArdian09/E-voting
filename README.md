@@ -19,7 +19,7 @@ Aplikasi pemilihan Ketua OSIS berbasis web dengan sistem voting yang **aman**, *
 - **Database**: MySQL  
 
 
-## ⚙️ Setup Guide
+## ⚙️ Panduan Instalasi
 
 ### 1. Clone project
 ```bash
