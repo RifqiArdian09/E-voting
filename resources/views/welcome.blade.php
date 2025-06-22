@@ -386,7 +386,7 @@
     <div class="max-w-4xl mx-auto text-center">
       <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl">
         <h3 class="text-3xl font-bold mb-6">Siap Menggunakan Hak Pilih Anda?</h3>
-        <p class="mb-8 text-white/90 max-w-2xl mx-auto">Pemilihan akan ditutup dalam 24 jam. Pastikan suara Anda menentukan masa depan OSIS SMK Negeri 1 !</p>
+        <p class="mb-8 text-white/90 max-w-2xl mx-auto">Pemilihan akan ditutup dalam {{ $waktuTersisa }}. Pastikan suara Anda menentukan masa depan OSIS SMK Negeri 1 !</p>
         <a href="{{ route('vote.login') }}" class="inline-block bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg transform hover:scale-105">Vote Sekarang</a>
       </div>
     </div>

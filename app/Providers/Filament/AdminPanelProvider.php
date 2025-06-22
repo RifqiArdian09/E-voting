@@ -39,6 +39,9 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
+                \App\Filament\Widgets\VotingStatsWidget::class,
+                \App\Filament\Widgets\VotingBarChartWidget::class,
+                \App\Filament\Widgets\CandidatesTable::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -55,6 +58,5 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->databaseNotifications();
-
     }
 }

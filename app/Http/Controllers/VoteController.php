@@ -8,6 +8,7 @@ use App\Models\Candidate;
 use App\Models\Vote;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Session;
+use Carbon\Carbon;
 
 class VoteController extends Controller
 {
@@ -19,7 +20,7 @@ class VoteController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'nisn'=>'required',
+            'nisn' => 'required',
             'token' => 'required'
         ]);
 
@@ -68,8 +69,13 @@ class VoteController extends Controller
         }
 
         $candidates = Candidate::all();
+        $waktuTersisa = $now->diffForHumans($setting->voting_end, [
+            'parts' => 2,
+            'join' => true,
+            'syntax' => \Carbon\CarbonInterface::DIFF_RELATIVE_TO_NOW,
+        ]);
 
-        return view('vote.page', compact('voter', 'candidates', 'token'));
+        return view('vote.page', compact('voter', 'candidates', 'token', 'waktuTersisa'));
     }
 
     public function submitVote(Request $request, $token)
